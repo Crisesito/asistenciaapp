@@ -27,11 +27,12 @@ body {
 .table th {
     position: sticky;
     top: 0;
+    background-color: #0d6efd;
+    color: white;
 }
 
-#reporteTable {
+.table-responsive {
     max-height: 500px;
-    display: block;
     overflow-y: auto;
 }
 
@@ -48,4 +49,28 @@ body {
 
 .btn-primary:hover {
     background-color: #0b5ed7;
+}
+
+.btn-success {
+    background-color: #198754;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+}
+
+select[multiple] {
+    min-height: 100px;
+}
+
+.filter-section {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.text-muted {
+    font-size: 0.8rem;
 }

@@ -52,6 +52,14 @@
                     <div class="card-body">
                         <form id="actividadForm">
                             <div class="mb-3">
+                                <label class="form-label">Área</label>
+                                <select class="form-select" id="areaActividad" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Emprendimiento">Emprendimiento</option>
+                                    <option value="Voluntariado">Voluntariado</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="nombreActividad" required>
                             </div>
@@ -82,7 +90,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Archivo Excel</label>
                                 <input type="file" class="form-control" id="archivoExcel" accept=".xlsx,.xls" required>
-                                <small class="text-muted">Formato: RUT | Nombre (sin cabeceras)</small>
+                                <small class="text-muted">Formato: RUT | Nombre | Email (opcional) (sin cabeceras)</small>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Importar</button>
                         </form>
@@ -91,19 +99,74 @@
             </div>
         </div>
 
-        <!-- Sección Reportes -->
+        <!-- Sección Reporte por Actividad -->
         <div class="card mb-4">
             <div class="card-header bg-primary text-white">
-                <h5>Reporte de Participación</h5>
+                <h5>Reporte por Actividad</h5>
             </div>
             <div class="card-body">
-                <button id="generarReporteBtn" class="btn btn-success mb-3">Generar Reporte</button>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Filtrar por Área</label>
+                        <select class="form-select" id="filtroAreaReporte">
+                            <option value="">Todas las áreas</option>
+                            <option value="Emprendimiento">Emprendimiento</option>
+                            <option value="Voluntariado">Voluntariado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Actividad</label>
+                        <select class="form-select" id="filtroActividadReporte" disabled>
+                            <option value="">Seleccione una actividad</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button id="generarReporteActividadBtn" class="btn btn-success w-100">Generar Reporte</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="reporteTable">
+                    <table class="table table-bordered" id="reporteActividadTable">
                         <thead class="table-primary">
                             <tr>
                                 <th>RUT</th>
                                 <th>Nombre</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <button id="exportarReporteActividadBtn" class="btn btn-primary mt-3">Exportar a Excel</button>
+            </div>
+        </div>
+
+        <!-- Sección Reporte General -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5>Reporte General de Participación</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Filtrar por Área</label>
+                        <select class="form-select" id="filtroAreaGeneral" multiple>
+                            <option value="Emprendimiento" selected>Emprendimiento</option>
+                            <option value="Voluntariado" selected>Voluntariado</option>
+                        </select>
+                        <small class="text-muted">Mantenga presionado Ctrl para seleccionar múltiples</small>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                        <button id="generarReporteGeneralBtn" class="btn btn-success w-100">Generar Reporte</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="reporteGeneralTable">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Área</th>
+                                <th>RUT</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
                                 <th>Asistencias</th>
                                 <th>Total Actividades</th>
                                 <th>Participación</th>
@@ -112,6 +175,7 @@
                         <tbody></tbody>
                     </table>
                 </div>
+                <button id="exportarReporteGeneralBtn" class="btn btn-primary mt-3">Exportar a Excel</button>
             </div>
         </div>
     </div>
