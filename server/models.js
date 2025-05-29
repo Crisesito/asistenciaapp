@@ -226,4 +226,10 @@ inicializarDB(() => {
     console.log('Base de datos verificada y lista');
 });
 
-module.exports = { Usuario, Actividad, Persona, Participacion };
+module.exports = { 
+    Usuario, 
+    Actividad, 
+    Persona, 
+    Participacion,
+    normalizarRUT 
+};

@@ -4,6 +4,7 @@ const session = require('express-session');
 const cors = require('cors');
 const path = require('path');
 const { Usuario, Actividad, Persona, Participacion } = require('./models');
+const { normalizarRUT } = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -191,6 +192,57 @@ app.post('/api/participantes/importar', (req, res) => {
     };
     
     procesarParticipante(0);
+});
+// Buscar persona por RUT
+app.get('/api/personas/buscar', (req, res) => {
+    const { rut } = req.query;
+    if (!rut) return res.status(400).json({ error: 'RUT requerido' });
+
+    db.get(
+        "SELECT * FROM personas WHERE rut = ?",
+        [normalizarRUT(rut)],
+        (err, row) => {
+            if (err) {
+                console.error('Error buscando persona:', err);
+                return res.status(500).json({ error: 'Error en la búsqueda' });
+            }
+            res.json(row || null);
+        }
+    );
+});
+
+// Crear/actualizar persona (endpoint separado para uso manual)
+app.post('/api/personas/crear', (req, res) => {
+    const { rut, nombre, email } = req.body;
+    
+    if (!rut || !nombre) {
+        return res.status(400).json({ error: 'RUT y nombre son requeridos' });
+    }
+
+    Persona.crear(rut, nombre, email, (err, personaId) => {
+        if (err) {
+            console.error('Error al crear persona:', err);
+            return res.status(500).json({ error: 'Error al crear persona' });
+        }
+        res.json({ id: personaId, message: 'Persona registrada/actualizada' });
+    });
+});
+
+// Registrar participación (endpoint separado para uso manual)
+app.post('/api/participaciones/registrar', (req, res) => {
+    const { personaId, actividadId } = req.body;
+    
+    if (!personaId || !actividadId) {
+        return res.status(400).json({ error: 'ID de persona y actividad requeridos' });
+    }
+
+    Participacion.registrar(personaId, actividadId, (err) => {
+        if (err) {
+            console.error('Error al registrar participación:', err);
+            return res.status(500).json({ error: 'Error al registrar participación' });
+        }
+        res.json({ message: 'Participación registrada' });
+    });
 });
 
 // Reportes

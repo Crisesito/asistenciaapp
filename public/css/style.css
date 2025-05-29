@@ -142,3 +142,17 @@ select[multiple] option {
 .container {
     max-width: 1400px;
 }
+/* Estilos para el formulario de registro manual */
+#registroManualForm .form-control, 
+#registroManualForm .form-select {
+    margin-bottom: 15px;
+}
+
+#registroManualForm .btn {
+    margin-top: 10px;
+}
+
+/* Estilo para campos autocompletados */
+.autocompletado {
+    background-color: #f0f8ff;
+}

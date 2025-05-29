@@ -1,260 +1,391 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Asistencias</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
     <!-- Modal Login -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title">Iniciar Sesión</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="loginUsername" value="admin" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="loginPassword" value="Desafioadmin2024" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
-                    </form>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Iniciar Sesión</h5>
+          </div>
+          <div class="modal-body">
+            <form id="loginForm">
+              <div class="mb-3">
+                <label class="form-label">Usuario</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="loginUsername"
+                  value="admin"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginPassword"
+                  value="Desafioadmin2024"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Ingresar
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Barra Superior -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <span class="navbar-brand">Sistema de Asistencias</span>
-            <button id="logoutBtn" class="btn btn-sm btn-outline-light d-none">Cerrar Sesión</button>
-        </div>
+      <div class="container">
+        <span class="navbar-brand">Sistema de Asistencias</span>
+        <button id="logoutBtn" class="btn btn-sm btn-outline-light d-none">
+          Cerrar Sesión
+        </button>
+      </div>
     </nav>
 
     <!-- Contenido Principal (oculto inicialmente) -->
-    <div class="container my-4" id="appContent" style="display:none;">
-        <div class="row">
-            <!-- Sección Actividades -->
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-header bg-primary text-white">
-                        <h5>Crear Actividad</h5>
-                    </div>
-                    <div class="card-body">
-                        <form id="actividadForm">
-                            <div class="mb-3">
-                                <label class="form-label">Área</label>
-                                <select class="form-select" id="areaActividad" required>
-                                    <option value="">Seleccionar...</option>
-                                    <option value="Emprendimiento">Emprendimiento</option>
-                                    <option value="Voluntariado">Voluntariado</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombreActividad" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Fecha</label>
-                                <input type="date" class="form-control" id="fechaActividad" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Región</label>
-                                <select class="form-select" id="regionActividad" required>
-                                    <option value="">Seleccionar...</option>
-                                    <option value="Arica y Parinacota">Arica y Parinacota</option>
-                                    <option value="Tarapacá">Tarapacá</option>
-                                    <option value="Antofagasta">Antofagasta</option>
-                                    <option value="Atacama">Atacama</option>
-                                    <option value="Coquimbo">Coquimbo</option>
-                                    <option value="Valparaíso">Valparaíso</option>
-                                    <option value="Metropolitana">Metropolitana</option>
-                                    <option value="O'Higgins">O'Higgins</option>
-                                    <option value="Maule">Maule</option>
-                                    <option value="Ñuble">Ñuble</option>
-                                    <option value="Biobío">Biobío</option>
-                                    <option value="Araucanía">Araucanía</option>
-                                    <option value="Los Ríos">Los Ríos</option>
-                                    <option value="Los Lagos">Los Lagos</option>
-                                    <option value="Aysén">Aysén</option>
-                                    <option value="Magallanes">Magallanes</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Guardar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección Participantes -->
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-header bg-primary text-white">
-                        <h5>Importar Participantes</h5>
-                    </div>
-                    <div class="card-body">
-                        <form id="participantesForm">
-                            <div class="mb-3">
-                                <label class="form-label">Actividad</label>
-                                <select class="form-select" id="actividadSelect" required>
-                                    <option value="">Seleccionar...</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Archivo Excel</label>
-                                <input type="file" class="form-control" id="archivoExcel" accept=".xlsx,.xls" required>
-                                <small class="text-muted">Formato: RUT | Nombre | Email (opcional) (sin cabeceras)</small>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Importar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sección Reporte por Actividad -->
-        <div class="card mb-4">
+    <div class="container my-4" id="appContent" style="display: none">
+      <div class="row">
+        <!-- Sección Actividades -->
+        <div class="col-md-6 mb-4">
+          <div class="card h-100">
             <div class="card-header bg-primary text-white">
-                <h5>Reporte por Actividad</h5>
+              <h5>Crear Actividad</h5>
             </div>
             <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <label class="form-label">Filtrar por Área</label>
-                        <select class="form-select" id="filtroAreaReporte">
-                            <option value="">Todas las áreas</option>
-                            <option value="Emprendimiento">Emprendimiento</option>
-                            <option value="Voluntariado">Voluntariado</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Filtrar por Región</label>
-                        <select class="form-select" id="filtroRegionReporte">
-                            <option value="">Todas las regiones</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Fecha Inicio</label>
-                        <input type="date" class="form-control" id="fechaInicioReporte">
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Fecha Fin</label>
-                        <input type="date" class="form-control" id="fechaFinReporte">
-                    </div>
+              <form id="actividadForm">
+                <div class="mb-3">
+                  <label class="form-label">Área</label>
+                  <select class="form-select" id="areaActividad" required>
+                    <option value="">Seleccionar...</option>
+                    <option value="Emprendimiento">Emprendimiento</option>
+                    <option value="Voluntariado">Voluntariado</option>
+                  </select>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-md-9">
-                        <label class="form-label">Actividad</label>
-                        <select class="form-select" id="filtroActividadReporte" disabled>
-                            <option value="">Seleccione una actividad</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 d-flex align-items-end">
-                        <button id="generarReporteActividadBtn" class="btn btn-success w-100">Generar Reporte</button>
-                    </div>
+                <div class="mb-3">
+                  <label class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombreActividad"
+                    required
+                  />
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="reporteActividadTable">
-                        <thead class="table-primary">
-                            <tr>
-                                <th>RUT</th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                <div class="mb-3">
+                  <label class="form-label">Fecha</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="fechaActividad"
+                    required
+                  />
                 </div>
-                <button id="exportarReporteActividadBtn" class="btn btn-primary mt-3">Exportar a Excel</button>
+                <div class="mb-3">
+                  <label class="form-label">Región</label>
+                  <select class="form-select" id="regionActividad" required>
+                    <option value="">Seleccionar...</option>
+                    <option value="Arica y Parinacota">
+                      Arica y Parinacota
+                    </option>
+                    <option value="Tarapacá">Tarapacá</option>
+                    <option value="Antofagasta">Antofagasta</option>
+                    <option value="Atacama">Atacama</option>
+                    <option value="Coquimbo">Coquimbo</option>
+                    <option value="Valparaíso">Valparaíso</option>
+                    <option value="Metropolitana">Metropolitana</option>
+                    <option value="O'Higgins">O'Higgins</option>
+                    <option value="Maule">Maule</option>
+                    <option value="Ñuble">Ñuble</option>
+                    <option value="Biobío">Biobío</option>
+                    <option value="Araucanía">Araucanía</option>
+                    <option value="Los Ríos">Los Ríos</option>
+                    <option value="Los Lagos">Los Lagos</option>
+                    <option value="Aysén">Aysén</option>
+                    <option value="Magallanes">Magallanes</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  Guardar
+                </button>
+              </form>
             </div>
+          </div>
         </div>
 
-        <!-- Sección Reporte General -->
-        <div class="card mb-4">
+        <!-- Sección Participantes -->
+        <div class="col-md-6 mb-4">
+          <div class="card h-100">
             <div class="card-header bg-primary text-white">
-                <h5>Reporte General de Participación</h5>
+              <h5>Importar Participantes</h5>
             </div>
             <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-md-2">
-                        <label class="form-label">Filtrar por Área</label>
-                        <select class="form-select" id="filtroAreaGeneral" multiple>
-                            <option value="Emprendimiento" selected>Emprendimiento</option>
-                            <option value="Voluntariado" selected>Voluntariado</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Filtrar por Región</label>
-                        <select class="form-select" id="filtroRegionGeneral" multiple>
-                            <option value="Arica y Parinacota">Arica y Parinacota</option>
-                            <option value="Tarapacá">Tarapacá</option>
-                            <option value="Antofagasta">Antofagasta</option>
-                            <option value="Atacama">Atacama</option>
-                            <option value="Coquimbo">Coquimbo</option>
-                            <option value="Valparaíso">Valparaíso</option>
-                            <option value="Metropolitana">Metropolitana</option>
-                            <option value="O'Higgins">O'Higgins</option>
-                            <option value="Maule">Maule</option>
-                            <option value="Ñuble">Ñuble</option>
-                            <option value="Biobío">Biobío</option>
-                            <option value="Araucanía">Araucanía</option>
-                            <option value="Los Ríos">Los Ríos</option>
-                            <option value="Los Lagos">Los Lagos</option>
-                            <option value="Aysén">Aysén</option>
-                            <option value="Magallanes">Magallanes</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Fecha Inicio</label>
-                        <input type="date" class="form-control" id="fechaInicioGeneral">
-                    </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Fecha Fin</label>
-                        <input type="date" class="form-control" id="fechaFinGeneral">
-                    </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Buscar por RUT</label>
-                        <input type="text" class="form-control" id="filtroRutGeneral" placeholder="Ej: 12345678-9">
-                    </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <button id="generarReporteGeneralBtn" class="btn btn-success w-100">Generar Reporte</button>
-                    </div>
+              <form id="participantesForm">
+                <div class="mb-3">
+                  <label class="form-label">Actividad</label>
+                  <select class="form-select" id="actividadSelect" required>
+                    <option value="">Seleccionar...</option>
+                  </select>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="reporteGeneralTable">
-                        <thead class="table-primary">
-                            <tr>
-                                <th>Área</th>
-                                <th>Región</th>
-                                <th>RUT</th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Asistencias</th>
-                                <th>Total Actividades</th>
-                                <th>Participación</th>
-                                <th>Actividades Participadas</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                <div class="mb-3">
+                  <label class="form-label">Archivo Excel</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="archivoExcel"
+                    accept=".xlsx,.xls"
+                    required
+                  />
+                  <small class="text-muted"
+                    >Formato: RUT | Nombre | Email (opcional) (sin
+                    cabeceras)</small
+                  >
                 </div>
-                <button id="exportarReporteGeneralBtn" class="btn btn-primary mt-3">Exportar a Excel</button>
+                <button type="submit" class="btn btn-primary w-100">
+                  Importar
+                </button>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
+      <!-- Sección Registro Manual -->
+      <div class="card mb-4">
+        <div class="card h-100">
+          <div class="card-header bg-primary text-white">
+            <h5>Registro Manual</h5>
+          </div>
+          <div class="card-body">
+            <form id="registroManualForm">
+              <div class="mb-3">
+                <label class="form-label">Área</label>
+                <select class="form-select" id="areaRegistroManual" required>
+                  <option value="">Seleccionar...</option>
+                  <option value="Emprendimiento">Emprendimiento</option>
+                  <option value="Voluntariado">Voluntariado</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Actividad</label>
+                <select
+                  class="form-select"
+                  id="actividadRegistroManual"
+                  disabled
+                  required
+                >
+                  <option value="">Seleccione un área primero</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">RUT</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="rutRegistroManual"
+                  required
+                  placeholder="Ej: 12345678-9"
+                  <input type="text" class="form-control" id="rutRegistroManual" required
+       placeholder="Ej: 12345678-9">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombreRegistroManual"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="emailRegistroManual"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Registrar Participante
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Reporte por Actividad -->
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>Reporte por Actividad</h5>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <label class="form-label">Filtrar por Área</label>
+              <select class="form-select" id="filtroAreaReporte">
+                <option value="">Todas las áreas</option>
+                <option value="Emprendimiento">Emprendimiento</option>
+                <option value="Voluntariado">Voluntariado</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Filtrar por Región</label>
+              <select class="form-select" id="filtroRegionReporte">
+                <option value="">Todas las regiones</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Fecha Inicio</label>
+              <input type="date" class="form-control" id="fechaInicioReporte" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Fecha Fin</label>
+              <input type="date" class="form-control" id="fechaFinReporte" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-9">
+              <label class="form-label">Actividad</label>
+              <select class="form-select" id="filtroActividadReporte" disabled>
+                <option value="">Seleccione una actividad</option>
+              </select>
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+              <button
+                id="generarReporteActividadBtn"
+                class="btn btn-success w-100"
+              >
+                Generar Reporte
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="reporteActividadTable">
+              <thead class="table-primary">
+                <tr>
+                  <th>RUT</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <button id="exportarReporteActividadBtn" class="btn btn-primary mt-3">
+            Exportar a Excel
+          </button>
+        </div>
+      </div>
+
+      <!-- Sección Reporte General -->
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>Reporte General de Participación</h5>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <label class="form-label">Filtrar por Área</label>
+              <select class="form-select" id="filtroAreaGeneral" multiple>
+                <option value="Emprendimiento" selected>Emprendimiento</option>
+                <option value="Voluntariado" selected>Voluntariado</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Filtrar por Región</label>
+              <select class="form-select" id="filtroRegionGeneral" multiple>
+                <option value="Arica y Parinacota">Arica y Parinacota</option>
+                <option value="Tarapacá">Tarapacá</option>
+                <option value="Antofagasta">Antofagasta</option>
+                <option value="Atacama">Atacama</option>
+                <option value="Coquimbo">Coquimbo</option>
+                <option value="Valparaíso">Valparaíso</option>
+                <option value="Metropolitana">Metropolitana</option>
+                <option value="O'Higgins">O'Higgins</option>
+                <option value="Maule">Maule</option>
+                <option value="Ñuble">Ñuble</option>
+                <option value="Biobío">Biobío</option>
+                <option value="Araucanía">Araucanía</option>
+                <option value="Los Ríos">Los Ríos</option>
+                <option value="Los Lagos">Los Lagos</option>
+                <option value="Aysén">Aysén</option>
+                <option value="Magallanes">Magallanes</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Fecha Inicio</label>
+              <input type="date" class="form-control" id="fechaInicioGeneral" />
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Fecha Fin</label>
+              <input type="date" class="form-control" id="fechaFinGeneral" />
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Buscar por RUT</label>
+              <input
+                type="text"
+                class="form-control"
+                id="filtroRutGeneral"
+                placeholder="Ej: 12345678-9"
+              />
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+              <button
+                id="generarReporteGeneralBtn"
+                class="btn btn-success w-100"
+              >
+                Generar Reporte
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="reporteGeneralTable">
+              <thead class="table-primary">
+                <tr>
+                  <th>Área</th>
+                  <th>Región</th>
+                  <th>RUT</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Asistencias</th>
+                  <th>Total Actividades</th>
+                  <th>Participación</th>
+                  <th>Actividades Participadas</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <button id="exportarReporteGeneralBtn" class="btn btn-primary mt-3">
+            Exportar a Excel
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="js/app.js"></script>
-</body>
+  </body>
 </html>
