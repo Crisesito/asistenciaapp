@@ -67,6 +67,28 @@
                                 <label class="form-label">Fecha</label>
                                 <input type="date" class="form-control" id="fechaActividad" required>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">Región</label>
+                                <select class="form-select" id="regionActividad" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Arica y Parinacota">Arica y Parinacota</option>
+                                    <option value="Tarapacá">Tarapacá</option>
+                                    <option value="Antofagasta">Antofagasta</option>
+                                    <option value="Atacama">Atacama</option>
+                                    <option value="Coquimbo">Coquimbo</option>
+                                    <option value="Valparaíso">Valparaíso</option>
+                                    <option value="Metropolitana">Metropolitana</option>
+                                    <option value="O'Higgins">O'Higgins</option>
+                                    <option value="Maule">Maule</option>
+                                    <option value="Ñuble">Ñuble</option>
+                                    <option value="Biobío">Biobío</option>
+                                    <option value="Araucanía">Araucanía</option>
+                                    <option value="Los Ríos">Los Ríos</option>
+                                    <option value="Los Lagos">Los Lagos</option>
+                                    <option value="Aysén">Aysén</option>
+                                    <option value="Magallanes">Magallanes</option>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-primary w-100">Guardar</button>
                         </form>
                     </div>
@@ -106,7 +128,7 @@
             </div>
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="form-label">Filtrar por Área</label>
                         <select class="form-select" id="filtroAreaReporte">
                             <option value="">Todas las áreas</option>
@@ -114,13 +136,29 @@
                             <option value="Voluntariado">Voluntariado</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <label class="form-label">Filtrar por Región</label>
+                        <select class="form-select" id="filtroRegionReporte">
+                            <option value="">Todas las regiones</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Fecha Inicio</label>
+                        <input type="date" class="form-control" id="fechaInicioReporte">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Fecha Fin</label>
+                        <input type="date" class="form-control" id="fechaFinReporte">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-9">
                         <label class="form-label">Actividad</label>
                         <select class="form-select" id="filtroActividadReporte" disabled>
                             <option value="">Seleccione una actividad</option>
                         </select>
                     </div>
-                    <div class="col-md-4 d-flex align-items-end">
+                    <div class="col-md-3 d-flex align-items-end">
                         <button id="generarReporteActividadBtn" class="btn btn-success w-100">Generar Reporte</button>
                     </div>
                 </div>
@@ -147,15 +185,47 @@
             </div>
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                         <label class="form-label">Filtrar por Área</label>
                         <select class="form-select" id="filtroAreaGeneral" multiple>
                             <option value="Emprendimiento" selected>Emprendimiento</option>
                             <option value="Voluntariado" selected>Voluntariado</option>
                         </select>
-                        <small class="text-muted">Mantenga presionado Ctrl para seleccionar múltiples</small>
                     </div>
-                    <div class="col-md-6 d-flex align-items-end">
+                    <div class="col-md-2">
+                        <label class="form-label">Filtrar por Región</label>
+                        <select class="form-select" id="filtroRegionGeneral" multiple>
+                            <option value="Arica y Parinacota">Arica y Parinacota</option>
+                            <option value="Tarapacá">Tarapacá</option>
+                            <option value="Antofagasta">Antofagasta</option>
+                            <option value="Atacama">Atacama</option>
+                            <option value="Coquimbo">Coquimbo</option>
+                            <option value="Valparaíso">Valparaíso</option>
+                            <option value="Metropolitana">Metropolitana</option>
+                            <option value="O'Higgins">O'Higgins</option>
+                            <option value="Maule">Maule</option>
+                            <option value="Ñuble">Ñuble</option>
+                            <option value="Biobío">Biobío</option>
+                            <option value="Araucanía">Araucanía</option>
+                            <option value="Los Ríos">Los Ríos</option>
+                            <option value="Los Lagos">Los Lagos</option>
+                            <option value="Aysén">Aysén</option>
+                            <option value="Magallanes">Magallanes</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Fecha Inicio</label>
+                        <input type="date" class="form-control" id="fechaInicioGeneral">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Fecha Fin</label>
+                        <input type="date" class="form-control" id="fechaFinGeneral">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Buscar por RUT</label>
+                        <input type="text" class="form-control" id="filtroRutGeneral" placeholder="Ej: 12345678-9">
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
                         <button id="generarReporteGeneralBtn" class="btn btn-success w-100">Generar Reporte</button>
                     </div>
                 </div>
@@ -164,12 +234,14 @@
                         <thead class="table-primary">
                             <tr>
                                 <th>Área</th>
+                                <th>Región</th>
                                 <th>RUT</th>
                                 <th>Nombre</th>
                                 <th>Email</th>
                                 <th>Asistencias</th>
                                 <th>Total Actividades</th>
                                 <th>Participación</th>
+                                <th>Actividades Participadas</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
